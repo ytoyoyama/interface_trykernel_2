@@ -18,6 +18,36 @@
 　├ part5 第5部　OS作り② SMP方式  
 　└ part6 第6章　Pico SDKとTry Kernelのハイブリッドシステム  
 
+## 記事の訂正
+記事の訂正を以下に記します。配布プログラムは問題ありません。  
+- P43 「リスト2　Try Kernel 2.0（シングルコア版）のsources.mk」に、以下のように3ファイル(interrupt.c, gpio.c, messagebuf.c)追加してください。  
+```
+CSRCS = \
+(一部省略)
+kernel/interrupt.c \
+kernel/gpio.c \
+kernel/messagebuf.c \
+(一部省略)
+application/usermain.c 
+```
+- P60 「リスト1 ECHO信号の割り込みハンドラ」を以下のように変更してください  
+(誤)  
+#define INTNO_ECHO_EDGE_HIGT    19  
+#define INTNO_ECHO_EDGE_LOW     18  
+(正)  
+#define INTNO_ECHO_EDGE_HIGT    21  
+#define INTNO_ECHO_EDGE_LOW     20  
+
+- P61 本文を以下の様に変更してください。  
+(誤) ECHO端子からの信号による立ち上がりエッジの割り込みはINTR1レジスタのビット19，立ち下がりエッジの割り込みは同じレジスタのビット18にセッ
+トされます．  
+(正) ECHO端子からの信号による立ち上がりエッジの割り込みはINTR1レジスタのビット21，立ち下がりエッジの割り込みは同じレジスタのビット20にセッ
+トされます．
+
+- P61 「リスト2 センサ制御タスク」を以下の様に変更してください。  
+(誤)  tim_val = tim1 - tim0;  
+(正)  tim_val = tim2 - tim1;  
+
 ## 関連リンク
 
 Try Kernelについては以下をご覧ください。  
